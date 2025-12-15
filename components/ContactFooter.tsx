@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, ShoppingCart, X, Copy, Check, AlertCircle } from 'lucide-react';
+import { Send, ShoppingCart, X, Check, Mail } from 'lucide-react';
 
 const ContactFooter: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -9,22 +9,40 @@ const ContactFooter: React.FC = () => {
     message: ''
   });
   const [showModal, setShowModal] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowModal(true);
-  };
+    setIsSubmitting(true);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(formData.message);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    const formElement = e.currentTarget;
+    const formDataToSend = new FormData(formElement);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Limpiar formulario y mostrar modal de éxito
+        setFormData({ nombre: '', email: '', message: '' });
+        setShowModal(true);
+      } else {
+        console.error("Error en el envío", data);
+      }
+    } catch (error) {
+      console.error("Error de conexión", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -68,8 +86,16 @@ const ContactFooter: React.FC = () => {
            <div className="p-12 md:p-16 bg-white">
               <form 
                 className="space-y-6"
+                action="https://api.web3forms.com/submit"
+                method="POST"
                 onSubmit={handleSubmit}
               >
+                 {/* Web3Forms Access Key */}
+                 <input type="hidden" name="access_key" value="8389036c-1921-430f-a6b4-665249ca2646" />
+                 
+                 {/* Spam Protection (Honeypot) - optional but recommended by Web3Forms usually, keeping simple as requested */}
+                 <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
                  <InputGroup 
                    label="Nombre" 
                    placeholder="Tu nombre completo" 
@@ -107,10 +133,12 @@ const ContactFooter: React.FC = () => {
                  <motion.button
                    whileHover={{ scale: 1.02 }}
                    whileTap={{ scale: 0.98 }}
-                   className="w-full py-4 bg-charran-wood text-white font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-charran-burgundy transition-colors duration-300"
+                   disabled={isSubmitting}
+                   className={`w-full py-4 bg-charran-wood text-white font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-charran-burgundy transition-colors duration-300 ${isSubmitting ? 'opacity-75 cursor-wait' : ''}`}
                    type="submit"
                  >
-                    Enviar Mensaje <Send size={16} />
+                    {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'} 
+                    {!isSubmitting && <Send size={16} />}
                  </motion.button>
               </form>
            </div>
@@ -130,7 +158,7 @@ const ContactFooter: React.FC = () => {
         </div>
       </div>
 
-      {/* Error Modal */}
+      {/* Success Modal */}
       <AnimatePresence>
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -158,40 +186,28 @@ const ContactFooter: React.FC = () => {
                 <X size={24} />
               </button>
 
-              <div className="p-8 md:p-10">
-                <div className="flex items-center gap-3 mb-4 text-charran-wood">
-                  <AlertCircle size={32} className="text-charran-burgundy" />
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold leading-tight">
-                    ¡Oopss! Parece que tenemos un problemilla técnico 😅
-                  </h3>
+              <div className="p-8 md:p-10 text-center">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-700">
+                     <Mail size={32} />
+                  </div>
                 </div>
 
-                <p className="text-gray-600 mb-6 font-light leading-relaxed">
-                  Hemos encontrado problemas al procesar el envío. Puedes escribirnos directamente a <a href="mailto:info@editorialcharran.com" className="font-bold text-charran-burgundy hover:underline">info@editorialcharran.com</a>.
+                <h3 className="font-serif text-2xl md:text-3xl font-bold leading-tight text-charran-wood mb-4">
+                  ¡Mensaje Enviado!
+                </h3>
+
+                <p className="text-gray-600 mb-8 font-light leading-relaxed">
+                  Gracias por contactar con Editorial Charrán. Hemos recibido tu mensaje correctamente y te responderemos a la mayor brevedad posible.
                 </p>
 
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6 relative group">
-                  <p className="text-sm text-gray-400 uppercase tracking-widest text-[10px] mb-2 font-bold">Tu Mensaje:</p>
-                  <p className="text-charran-wood font-serif italic text-lg leading-relaxed whitespace-pre-wrap">
-                    {formData.message || "(Mensaje vacío)"}
-                  </p>
-                </div>
-
                 <motion.button
-                  onClick={copyToClipboard}
+                  onClick={() => setShowModal(false)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-3 bg-charran-wood text-white font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-charran-burgundy transition-colors duration-300 rounded-sm"
                 >
-                  {copied ? (
-                    <>
-                      <Check size={18} className="text-green-400" /> ¡Copiado!
-                    </>
-                  ) : (
-                    <>
-                      <Copy size={18} /> Copiar mensaje
-                    </>
-                  )}
+                  <Check size={18} /> Entendido
                 </motion.button>
               </div>
             </motion.div>

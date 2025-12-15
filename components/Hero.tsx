@@ -41,16 +41,6 @@ const Hero: React.FC = () => {
               En Editorial Charrán podrás encontrar libros de la literatura hispana y mundial, resumidos y adaptados cuidadosamente al nivel del estudiante.
             </p>
           </motion.div>
-
-          <motion.div 
-            className="flex flex-wrap gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <InteractiveButton text="Ver Catálogo" primary />
-            <InteractiveButton text="Sobre Nosotros" />
-          </motion.div>
         </div>
 
         <div className="md:col-span-5 relative hidden md:block h-[600px] perspective-1000">
@@ -85,31 +75,6 @@ const Hero: React.FC = () => {
         <ArrowDown className="animate-bounce" size={20} />
       </motion.div>
     </section>
-  );
-};
-
-const InteractiveButton = ({ text, primary = false }: { text: string; primary?: boolean }) => {
-  return (
-    <motion.button
-      className={`relative px-8 py-4 overflow-hidden group border border-charran-wood ${primary ? 'text-white' : 'text-charran-wood'}`}
-      whileHover="hover"
-      initial="initial"
-    >
-      <motion.div 
-        className={`absolute inset-0 w-full h-full ${primary ? 'bg-charran-wood' : 'bg-transparent'}`}
-      />
-      <motion.div 
-        variants={{
-          initial: { x: '-100%', skewX: 15 },
-          hover: { x: '0%', skewX: 0 }
-        }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-        className={`absolute inset-0 w-full h-full ${primary ? 'bg-charran-burgundy' : 'bg-charran-wood'}`}
-      />
-      <span className={`relative z-10 font-bold uppercase tracking-wider text-sm transition-colors duration-300 ${primary ? 'group-hover:text-white' : 'group-hover:text-white'}`}>
-        {text}
-      </span>
-    </motion.button>
   );
 };
 
