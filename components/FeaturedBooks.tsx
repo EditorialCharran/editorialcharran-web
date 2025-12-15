@@ -29,7 +29,7 @@ const books: Book[] = [
     title: "Peter Pan y Wendy",
     author: "James M. Barrie",
     color: "#1a1a1a",
-    image: "https://i.postimg.cc/vBcVVv7t/003-Portada-simple.jpg"
+    image: "https://i.postimg.cc/d1GnTJ9v/003-Portada-simple.jpg"
   }
 ];
 
