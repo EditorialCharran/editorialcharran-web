@@ -4,19 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editorial Charrán</title>
-
-    <!-- Tailwind CDN (ok por ahora, aunque no ideal para producción) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Lato:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Tailwind config -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -24,57 +15,48 @@
             colors: {
               charran: {
                 white: '#f9f9f9',
-                wood: '#2C1A12',
-                burgundy: '#570A15',
-                gold: '#C5A059'
+                wood: '#2C1A12', // Dark wood
+                burgundy: '#570A15', // Deep burgundy
+                gold: '#C5A059' // Subtle accent
               }
             },
             fontFamily: {
               serif: ['"Playfair Display"', 'serif'],
-              sans: ['"Lato"', 'sans-serif']
+              sans: ['"Lato"', 'sans-serif'],
             }
           }
         }
       }
     </script>
-
-    <!-- Estilos mínimos globales -->
     <style>
       body {
         background-color: #f9f9f9;
         overflow-x: hidden;
       }
-
+      /* Smooth scrolling for anchor links */
       html {
         scroll-behavior: smooth;
       }
-
       ::selection {
         background: #570A15;
         color: white;
       }
     </style>
-
-    <!-- Import map (AIStudio) -->
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://aistudiocdn.com/react@^19.2.1",
-          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-          "react/": "https://aistudiocdn.com/react@^19.2.1/",
-          "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-          "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25"
-        }
-      }
-    </script>
-
-    <!-- ❌ ELIMINADO: index.css (no existe y rompía el build) -->
-  </head>
-
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
   <body>
     <div id="root"></div>
-
-    <!-- Entry point -->
-    <script type="module" src="/index.tsx"></script>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>

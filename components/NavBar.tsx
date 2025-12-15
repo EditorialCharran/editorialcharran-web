@@ -4,8 +4,6 @@ import { Menu, X, Check, AlertCircle, Mail } from 'lucide-react';
 
 const navLinks = [
   { name: 'Inicio', href: '#inicio' },
-  { name: 'Catálogo', href: '#catalogo' },
-  { name: 'Nosotros', href: '#nosotros' },
   { name: 'Contacto', href: '#contacto' },
 ];
 
