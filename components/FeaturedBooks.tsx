@@ -22,14 +22,14 @@ const books: Book[] = [
     title: "Viaje al centro de la Tierra",
     author: "Julio Verne",
     color: "#570A15",
-    image: "https://i.postimg.cc/T1hVd9SK/Portada-simple.jpg"
+    image: "https://i.postimg.cc/yNvkKX35/Portada-simple.jpg"
   },
   {
     id: 3,
     title: "Peter Pan y Wendy",
     author: "James M. Barrie",
     color: "#1a1a1a",
-    image: "https://i.postimg.cc/d1GnTJ9v/003-Portada-simple.jpg"
+    image: "https://i.postimg.cc/DyksB6r0/003-Portada-simple.jpg"
   }
 ];
 
