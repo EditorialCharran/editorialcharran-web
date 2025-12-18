@@ -30,6 +30,13 @@ const books: Book[] = [
     author: "James M. Barrie",
     color: "#1a1a1a",
     image: "https://i.postimg.cc/DyksB6r0/003-Portada-simple.jpg"
+  },
+  {
+    id: 4,
+    title: "Sherlock Holmes - El sabueso de los Baskerville",
+    author: "Arthur Conan Doyle",
+    color: "#2C1A12",
+    image: "https://i.postimg.cc/1tr8B4qH/004-Portada-simple.jpg"
   }
 ];
 
@@ -54,7 +61,7 @@ const FeaturedBooks: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {books.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
@@ -74,7 +81,7 @@ const BookCard: React.FC<{ book: Book }> = ({ book }) => {
       transition={{ duration: 0.6 }}
     >
       <motion.div
-        className="relative aspect-[2/3] w-full bg-gray-100 shadow-xl overflow-hidden"
+        className="relative aspect-[2/3] w-full bg-gray-100 shadow-xl overflow-hidden rounded-sm"
         whileHover={{ 
           y: -15, 
           rotateY: -5, 
@@ -94,20 +101,20 @@ const BookCard: React.FC<{ book: Book }> = ({ book }) => {
         {/* Overlay content on hover */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-charran-burgundy/80 backdrop-blur-sm p-6 text-center">
           <div>
-            <p className="text-white font-serif text-2xl mb-2 italic">{book.title}</p>
-            <p className="text-white/80 uppercase text-xs tracking-widest mb-6">por {book.author}</p>
-            <button className="px-6 py-2 border border-white text-white uppercase text-xs font-bold hover:bg-white hover:text-charran-burgundy transition-colors">
+            <p className="text-white font-serif text-xl mb-2 italic leading-tight">{book.title}</p>
+            <p className="text-white/80 uppercase text-[10px] tracking-widest mb-6">por {book.author}</p>
+            <button className="px-4 py-2 border border-white text-white uppercase text-[10px] font-bold hover:bg-white hover:text-charran-burgundy transition-colors">
               Ver más en Amazon
             </button>
           </div>
         </div>
       </motion.div>
       
-      <div className="mt-6 text-center">
-        <h3 className="font-serif text-2xl text-charran-wood group-hover:text-charran-burgundy transition-colors duration-300">
+      <div className="mt-6 text-center px-2">
+        <h3 className="font-serif text-xl text-charran-wood group-hover:text-charran-burgundy transition-colors duration-300 leading-tight">
           {book.title}
         </h3>
-        <p className="text-gray-500 text-sm uppercase tracking-wide mt-1">{book.author}</p>
+        <p className="text-gray-500 text-[10px] uppercase tracking-wide mt-2">{book.author}</p>
       </div>
     </motion.div>
   );
