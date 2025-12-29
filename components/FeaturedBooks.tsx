@@ -7,7 +7,7 @@ interface Book {
   author: string;
   color: string;
   image: string;
-  category: 'A2' | 'B1';
+  category: 'A2' | 'B1' | 'B2';
   amazonUrl: string;
 }
 
@@ -37,20 +37,29 @@ const books: Book[] = [
     color: "#1a1a1a",
     image: "https://i.postimg.cc/DyksB6r0/003-Portada-simple.jpg",
     category: 'A2',
-    amazonUrl: "https://amazon.es"
+    amazonUrl: "https://mybook.to/peterpanyw"
   },
   {
     id: 4,
     title: "Sherlock Holmes - El sabueso de los Baskerville",
     author: "Arthur Conan Doyle",
     color: "#2C1A12",
-    image: "https://i.postimg.cc/1tr8B4qH/004-Portada-simple.jpg",
+    image: "https://i.postimg.cc/FKzHL1cF/004-Portada-simple.jpg",
     category: 'B1',
-    amazonUrl: "https://amazon.es"
+    amazonUrl: "https://mybook.to/elsabueso"
+  },
+  {
+    id: 5,
+    title: "Frankenstein o El moderno Prometeo",
+    author: "Mary Shelley",
+    color: "#1a1a1a",
+    image: "https://i.postimg.cc/tgcCtyt2/005-Portada-simple.jpg",
+    category: 'B2',
+    amazonUrl: ""
   }
 ];
 
-type FilterType = 'Todos' | 'A2' | 'B1';
+type FilterType = 'Todos' | 'A2' | 'B1' | 'B2';
 
 const FeaturedBooks: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>('Todos');
@@ -62,7 +71,7 @@ const FeaturedBooks: React.FC = () => {
   return (
     <section id="catalogo" className="py-24 bg-white relative">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div className="flex flex-col xl:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-xl">
             <motion.h2 
               initial={{ opacity: 0, x: -20 }}
@@ -79,14 +88,14 @@ const FeaturedBooks: React.FC = () => {
           </div>
 
           {/* Category Filters */}
-          <div className="flex gap-4 p-1 bg-gray-50 rounded-lg border border-gray-100">
-            {(['Todos', 'A2', 'B1'] as FilterType[]).map((filter) => (
+          <div className="flex flex-wrap gap-2 md:gap-4 p-1 bg-gray-50 rounded-lg border border-gray-100 overflow-x-auto max-w-full">
+            {(['Todos', 'A2', 'B1', 'B2'] as FilterType[]).map((filter) => (
               <motion.button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-8 py-2 text-xs font-bold uppercase tracking-widest transition-all duration-300 rounded-md relative ${
+                className={`px-6 md:px-8 py-2 text-xs font-bold uppercase tracking-widest transition-all duration-300 rounded-md relative whitespace-nowrap ${
                   activeFilter === filter 
                     ? 'text-white' 
                     : 'text-charran-wood hover:text-charran-burgundy'
@@ -107,7 +116,7 @@ const FeaturedBooks: React.FC = () => {
 
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 min-h-[500px]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 min-h-[500px]"
         >
           <AnimatePresence mode='popLayout'>
             {filteredBooks.map((book) => (
@@ -160,14 +169,21 @@ const BookCard: React.FC<{ book: Book }> = ({ book }) => {
           <div>
             <p className="text-white font-serif text-xl mb-2 italic leading-tight">{book.title}</p>
             <p className="text-white/80 uppercase text-[10px] tracking-widest mb-6">por {book.author}</p>
-            <a 
-              href={book.amazonUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-4 py-2 border border-white text-white uppercase text-[10px] font-bold hover:bg-white hover:text-charran-burgundy transition-colors"
-            >
-              Ver más en Amazon
-            </a>
+            
+            {book.amazonUrl ? (
+              <a 
+                href={book.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-4 py-2 border border-white text-white uppercase text-[10px] font-bold hover:bg-white hover:text-charran-burgundy transition-colors"
+              >
+                Ver más en Amazon
+              </a>
+            ) : (
+              <span className="inline-block px-4 py-2 border border-white/50 text-white/80 uppercase text-[10px] font-bold cursor-default">
+                Próximamente
+              </span>
+            )}
           </div>
         </div>
       </motion.div>
