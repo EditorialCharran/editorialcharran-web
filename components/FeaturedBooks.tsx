@@ -55,6 +55,15 @@ const books: Book[] = [
     color: "#1a1a1a",
     image: "https://i.postimg.cc/tgcCtyt2/005-Portada-simple.jpg",
     category: 'B2',
+    amazonUrl: "https://mybook.to/frankensteinmshelley"
+  },
+  {
+    id: 6,
+    title: "La Odisea",
+    author: "Homero / Charles Lamb",
+    color: "#2C1A12",
+    image: "https://i.postimg.cc/PxHnqW8Y/006-Portada-simple.jpg",
+    category: 'A2',
     amazonUrl: ""
   }
 ];
