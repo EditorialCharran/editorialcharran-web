@@ -7,7 +7,7 @@ interface Book {
   author: string;
   color: string;
   image: string;
-  category: 'A2' | 'B1' | 'B2';
+  category: 'A2' | 'B1' | 'B2' | 'YE';
   amazonUrl: string;
 }
 
@@ -64,11 +64,29 @@ const books: Book[] = [
     color: "#2C1A12",
     image: "https://i.postimg.cc/PxHnqW8Y/006-Portada-simple.jpg",
     category: 'A2',
+    amazonUrl: "https://mybook.to/laodiseaA"
+  },
+  {
+    id: 7,
+    title: "La Odisea - Young Edition",
+    author: "Homero / Charles Lamb",
+    color: "#C5A059",
+    image: "https://i.postimg.cc/MKqrZ6H1/A-001-Portada-simple.jpg",
+    category: 'YE',
+    amazonUrl: "https://mybook.to/laodiseaYE"
+  },
+  {
+    id: 8,
+    title: "Viaje al centro de la Tierra - Young Edition",
+    author: "Julio Verne",
+    color: "#C5A059",
+    image: "https://i.postimg.cc/5NgK6hFc/A-002-Portada-simple.jpg",
+    category: 'YE',
     amazonUrl: ""
   }
 ];
 
-type FilterType = 'Todos' | 'A2' | 'B1' | 'B2';
+type FilterType = 'Todos' | 'A2' | 'B1' | 'B2' | 'YE';
 
 const FeaturedBooks: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>('Todos');
@@ -98,7 +116,7 @@ const FeaturedBooks: React.FC = () => {
 
           {/* Category Filters */}
           <div className="flex flex-wrap gap-2 md:gap-4 p-1 bg-gray-50 rounded-lg border border-gray-100 overflow-x-auto max-w-full">
-            {(['Todos', 'A2', 'B1', 'B2'] as FilterType[]).map((filter) => (
+            {(['Todos', 'A2', 'B1', 'B2', 'YE'] as FilterType[]).map((filter) => (
               <motion.button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
