@@ -1,5 +1,6 @@
 {
   "name": "Editorial Charrán",
-  "description": "Una landing page editorial interactiva con diseño moderno, animaciones fluidas y una paleta de colores elegante.",
-  "requestFramePermissions": []
+  "description": "Editorial de libros paralelos bilingües para aprender español e inglés con catálogo interactivo y lector dual.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
