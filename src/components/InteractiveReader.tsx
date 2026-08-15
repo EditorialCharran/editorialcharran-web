@@ -7,8 +7,6 @@ import {
   ZoomOut,
   RotateCcw,
   BookMarked,
-  Smartphone,
-  RotateCw,
 } from 'lucide-react';
 import { translations } from '../data/i18n';
 
@@ -154,27 +152,6 @@ export const InteractiveReader: React.FC<InteractiveReaderProps> = ({
           >
             {t.title}
           </h2>
-        </div>
-
-        {/* ================= MOBILE ROTATION PROMPT BANNER (Only on Mobile Portrait) ================= */}
-        <div
-          id="mobile-portrait-rotate-banner"
-          className="flex md:hidden landscape:hidden items-center justify-between gap-3 p-3.5 mb-5 bg-[#2B231D] text-[#FAF6F0] rounded-2xl shadow-lg border border-[#44382F] animate-pulse"
-        >
-          <div className="flex items-center gap-3">
-            <div className="relative w-9 h-9 rounded-xl bg-[#D96B43] flex items-center justify-center flex-shrink-0 text-white shadow-sm">
-              <Smartphone className="w-5 h-5" />
-              <RotateCw className="w-3.5 h-3.5 absolute -top-1 -right-1 text-white animate-spin" style={{ animationDuration: '4s' }} />
-            </div>
-            <div>
-              <p className="text-xs font-extrabold text-white tracking-tight leading-tight">
-                {t.rotateMobilePrompt}
-              </p>
-              <p className="text-[10px] text-[#D8CABE] mt-0.5">
-                Para disfrutar de la pantalla dividida al 50%
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Control Toolbar: Book Selector, Font Size, Theme */}

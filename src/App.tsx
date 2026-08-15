@@ -61,8 +61,6 @@ export default function App() {
         onSelectLang={handleSelectLang}
         savedCount={savedBookIds.length}
         onOpenSaved={() => setIsSavedDrawerOpen(true)}
-        searchQuery={searchQuery}
-        onSearchChange={(q) => setSearchQuery(q)}
       />
 
       <main className="flex-grow">
